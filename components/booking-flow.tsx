@@ -108,7 +108,11 @@ function saveCustomerProfile(profile: CustomerProfile, rememberAsLast = true) {
   if (rememberAsLast) window.localStorage.setItem(LAST_CUSTOMER_PHONE_KEY, phoneKey)
 }
 
-export function BookingFlow() {
+type BookingFlowProps = {
+  onConfirmationChange?: (isConfirmed: boolean) => void
+}
+
+export function BookingFlow({ onConfirmationChange }: BookingFlowProps) {
   const [entryStage, setEntryStage] = useState<EntryStage>('checking')
   const [isClubMember, setIsClubMember] = useState(false)
   const [remainingCuts, setRemainingCuts] = useState(2)
@@ -185,6 +189,7 @@ export function BookingFlow() {
     setName(isClubMember ? memberName : '')
     setPhone(isClubMember ? memberPhone : '')
     setConfirmed(false)
+    onConfirmationChange?.(false)
     setConfirmedWithClubCredit(false)
     setDayScrollProgress(0)
     setTimeScrollProgress(0)
@@ -254,6 +259,7 @@ export function BookingFlow() {
     }
 
     setConfirmed(true)
+    onConfirmationChange?.(true)
   }
 
   function selectBookingRecipient(recipient: BookingRecipient) {
