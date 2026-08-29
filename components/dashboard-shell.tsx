@@ -251,8 +251,8 @@ function Schedule({ scope, onScopeChange }: { scope: 'team' | 'mine'; onScopeCha
   const totalSlots = scope === 'mine' ? 6 : 16
 
   return (
-    <div className="grid gap-5 xl:grid-cols-[1fr_320px]">
-      <GlassCard className="p-4 sm:p-6">
+    <div className="grid min-w-0 gap-5 xl:grid-cols-[minmax(0,1fr)_320px]">
+      <GlassCard className="min-w-0 p-4 sm:p-6">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
           <SectionHeading eyebrow={`${selectedDate.week} · ${selectedDate.day} de agosto`} title={scope === 'mine' ? 'Minha agenda' : 'Agenda da equipe'} />
           <button className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-white px-4 text-xs font-semibold uppercase tracking-wider text-black transition-transform hover:-translate-y-0.5">
@@ -263,9 +263,9 @@ function Schedule({ scope, onScopeChange }: { scope: 'team' | 'mine'; onScopeCha
           <button type="button" onClick={() => onScopeChange('team')} className={`rounded-lg px-3 text-[10px] font-semibold uppercase tracking-wider transition-colors ${scope === 'team' ? 'bg-white text-black' : 'text-white/40 hover:text-white'}`}>Agenda geral</button>
           <button type="button" onClick={() => onScopeChange('mine')} className={`rounded-lg px-3 text-[10px] font-semibold uppercase tracking-wider transition-colors ${scope === 'mine' ? 'bg-white text-black' : 'text-white/40 hover:text-white'}`}>Minha agenda</button>
         </div>
-        <div className="dashboard-scrollbar -mx-4 mt-6 flex snap-x snap-mandatory gap-2 overflow-x-auto px-4 pb-1 sm:mx-0 sm:grid sm:grid-cols-6 sm:px-0">
+        <div className="mt-6 grid grid-cols-3 gap-2 sm:grid-cols-6">
           {days.map((item) => (
-            <button type="button" key={item.day} onClick={() => setSelectedDay(item.day)} aria-pressed={selectedDay === item.day} className={`min-w-14 snap-start rounded-xl border px-1 py-3 text-center transition-colors sm:min-w-0 ${selectedDay === item.day ? 'border-white bg-white text-black' : 'border-white/10 bg-white/[0.03] hover:bg-white/[0.08]'}`}>
+            <button type="button" key={item.day} onClick={() => setSelectedDay(item.day)} aria-pressed={selectedDay === item.day} className={`min-w-0 rounded-xl border px-1 py-3 text-center transition-colors ${selectedDay === item.day ? 'border-white bg-white text-black' : 'border-white/10 bg-white/[0.03] hover:bg-white/[0.08]'}`}>
               <span className={`block text-[9px] font-semibold tracking-widest ${selectedDay === item.day ? 'text-black/50' : 'text-white/35'}`}>{item.week}</span>
               <span className="mt-1 block font-display text-xl font-semibold">{item.day}</span>
             </button>
@@ -273,25 +273,25 @@ function Schedule({ scope, onScopeChange }: { scope: 'team' | 'mine'; onScopeCha
         </div>
         <div className="mt-6 space-y-2.5">
           {visibleAppointments.map((appointment, index) => (
-            <article key={appointment.time} className="glass-card group flex items-center gap-3 rounded-xl border p-3.5 transition-colors hover:bg-white/[0.08] sm:gap-5 sm:p-4">
+            <article key={appointment.time} className="glass-card group flex min-w-0 items-center gap-3 rounded-xl border p-3.5 transition-colors hover:bg-white/[0.08] sm:gap-5 sm:p-4">
               <div className="w-14 shrink-0 text-center sm:w-16">
                 <p className="font-display text-xl font-semibold">{appointment.time}</p>
                 <p className="text-[9px] uppercase tracking-wider text-white/35">{index % 2 ? '70 min' : '40 min'}</p>
               </div>
-              <div className="h-10 w-px bg-white/10" />
+              <div className="h-10 w-px shrink-0 bg-white/10" />
               <div className="min-w-0 flex-1">
                 <p className="truncate text-sm font-semibold sm:text-base">{appointment.client}</p>
                 <p className="mt-0.5 truncate text-xs text-white/40">{appointment.service} · {appointment.barber}</p>
               </div>
               <span className={`hidden rounded-full border px-2.5 py-1 text-[9px] font-semibold uppercase tracking-wider sm:inline ${appointment.status === 'Em breve' ? 'border-white bg-white text-black' : 'border-white/10 text-white/45'}`}>{appointment.status}</span>
-              <ChevronRight className="h-4 w-4 text-white/25 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
+              <ChevronRight className="h-4 w-4 shrink-0 text-white/25 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
             </article>
           ))}
           {visibleAppointments.length === 0 && <div className="rounded-xl border border-dashed border-white/10 py-12 text-center"><CalendarDays className="mx-auto h-5 w-5 text-white/25" aria-hidden="true" /><p className="mt-3 text-sm text-white/40">Nenhum horário marcado para este dia.</p></div>}
         </div>
       </GlassCard>
 
-      <div className="space-y-5">
+      <div className="min-w-0 space-y-5">
         <GlassCard className="p-5">
           <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-white/40">Resumo do dia</p>
           <p className="mt-3 font-display text-4xl font-semibold">{filledSlots} <span className="text-lg text-white/30">/ {totalSlots}</span></p>
@@ -756,8 +756,8 @@ export function DashboardShell() {
         </div>
       </aside>
 
-      <div className="dashboard-mobile-frame lg:ml-64">
-        <div className="dashboard-mobile-content">
+      <div className="dashboard-mobile-frame min-w-0 lg:ml-64">
+        <div className="dashboard-mobile-content min-w-0">
           <header className="dashboard-mobile-header sticky top-0 z-30 border-b border-white/10 bg-black/45 backdrop-blur-2xl">
           <div className="relative mx-auto flex min-h-16 max-w-[1500px] items-center justify-between px-3.5 py-2 sm:min-h-20 sm:px-6 lg:px-8">
             <div className="flex min-w-0 items-center gap-2.5 lg:hidden">
@@ -780,13 +780,13 @@ export function DashboardShell() {
           </div>
           </header>
 
-          <div className="mx-auto max-w-[1500px] px-3.5 py-5 min-[390px]:px-4 sm:px-6 sm:py-8 lg:px-8 lg:py-10">
+          <div className="mx-auto w-full min-w-0 max-w-[1500px] px-3.5 py-5 min-[390px]:px-4 sm:px-6 sm:py-8 lg:px-8 lg:py-10">
           <div className="mb-5 sm:mb-8">
             <div className="flex items-center gap-2 text-[9px] font-semibold uppercase tracking-[0.18em] text-white/40 sm:text-[10px] sm:tracking-[0.2em]"><span className="h-px w-5 bg-white/30 sm:w-6" /><span className="sm:hidden">Hoje · 28 de agosto</span><span className="hidden sm:inline">Sexta-feira, 28 de agosto</span></div>
             <h1 className="mt-3 font-display text-[1.75rem] font-semibold uppercase leading-none tracking-tight min-[380px]:text-3xl sm:text-5xl">{view === 'inicio' ? <>Bom dia, <span className="text-white/45">Davi.</span></> : current.label}</h1>
             <p className="mt-2.5 max-w-xl text-xs leading-relaxed text-white/40 sm:mt-3 sm:text-sm">{view === 'inicio' ? 'Aqui está o resumo do movimento da barbearia hoje.' : `Gerencie ${current.label.toLowerCase()} com uma visão simples e completa.`}</p>
           </div>
-          <div key={view} className="dashboard-view-transition">
+          <div key={view} className="dashboard-view-transition min-w-0">
             {view === 'inicio' && <Overview navigate={navigate} />}
             {view === 'agenda' && <Schedule scope={agendaScope} onScopeChange={setAgendaScope} />}
             {view === 'servicos' && <Services />}

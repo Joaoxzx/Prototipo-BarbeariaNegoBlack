@@ -66,20 +66,20 @@ export function EmployeePortal() {
   }
 
   return (
-    <main className="employee-portal-shell dashboard-background min-h-dvh text-white">
-      <div className="relative z-10">
+    <main className="employee-portal-shell dashboard-background min-h-dvh overflow-x-clip text-white">
+      <div className="relative z-10 min-w-0">
         <header className="employee-portal-header sticky top-0 z-30 border-b border-white/10 bg-black/65 backdrop-blur-2xl">
-          <div className="mx-auto flex min-h-16 max-w-3xl items-center gap-3 px-4">
-            <span className="relative h-9 w-9 overflow-hidden rounded-xl border border-white/15"><Image src="/barber-diego.png" alt="Diego Santos" fill sizes="36px" className="object-cover object-top" /></span>
+          <div className="mx-auto flex min-h-16 min-w-0 max-w-3xl items-center gap-3 px-4">
+            <span className="relative h-9 w-9 shrink-0 overflow-hidden rounded-xl border border-white/15"><Image src="/barber-diego.png" alt="Diego Santos" fill sizes="36px" className="object-cover object-top" /></span>
             <div className="min-w-0"><p className="text-[8px] font-semibold uppercase tracking-[0.2em] text-white/35">Minha agenda</p><p className="truncate text-sm font-semibold">Diego Santos</p></div>
-            <button type="button" aria-label="Notificações" className="ml-auto flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] text-white/50"><Bell className="h-4 w-4" /></button>
-            <button type="button" onClick={() => setLoggedIn(false)} aria-label="Sair" className="flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] text-white/50"><LogOut className="h-4 w-4" /></button>
+            <button type="button" aria-label="Notificações" className="ml-auto flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] text-white/50"><Bell className="h-4 w-4" /></button>
+            <button type="button" onClick={() => setLoggedIn(false)} aria-label="Sair" className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/[0.04] text-white/50"><LogOut className="h-4 w-4" /></button>
           </div>
         </header>
 
-        <div className="mx-auto max-w-3xl px-4 py-6 sm:py-8">
-          <div className="flex items-end justify-between gap-4">
-            <div><p className="text-[9px] font-semibold uppercase tracking-[0.18em] text-white/40">Sexta-feira · 28 de agosto</p><h1 className="mt-2 font-display text-3xl font-semibold uppercase">Bom dia, Diego.</h1><p className="mt-2 text-xs text-white/40">Confira seus atendimentos de hoje.</p></div>
+        <div className="mx-auto w-full min-w-0 max-w-3xl px-4 py-6 sm:py-8">
+          <div className="flex min-w-0 flex-col items-start gap-3 sm:flex-row sm:items-end sm:justify-between sm:gap-4">
+            <div className="min-w-0"><p className="text-[9px] font-semibold uppercase tracking-[0.18em] text-white/40">Sexta-feira · 28 de agosto</p><h1 className="mt-2 font-display text-3xl font-semibold uppercase">Bom dia, Diego.</h1><p className="mt-2 text-xs text-white/40">Confira seus atendimentos de hoje.</p></div>
             <span className="rounded-full border border-white/10 px-3 py-1.5 text-[9px] uppercase tracking-wider text-white/40">Protótipo</span>
           </div>
 
@@ -91,9 +91,9 @@ export function EmployeePortal() {
 
           <section className="glass-panel relative mt-4 overflow-hidden rounded-2xl border p-4 sm:p-5">
             <div className="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-emerald-300/10 blur-3xl" />
-            <div className="relative flex items-end justify-between gap-4">
-              <div><p className="text-[9px] font-semibold uppercase tracking-[0.18em] text-white/35">Seus ganhos · agosto</p><p className="mt-2 font-display text-3xl font-semibold">{currencyFormatter.format(employeeRevenue * (100 - ownerShareRate) / 100)}</p><p className="mt-1 text-xs text-emerald-300/75">Você recebe {100 - ownerShareRate}% · {ownerShareRate}% fica para o dono</p></div>
-              <div className="rounded-xl border border-white/10 bg-white/[0.05] px-3 py-2 text-right"><p className="text-[8px] uppercase tracking-wider text-white/30">Previsão</p><p className="mt-1 text-xs font-semibold">Fim do mês</p></div>
+            <div className="relative flex min-w-0 flex-col items-start gap-4 sm:flex-row sm:items-end sm:justify-between">
+              <div className="min-w-0"><p className="text-[9px] font-semibold uppercase tracking-[0.18em] text-white/35">Seus ganhos · agosto</p><p className="mt-2 font-display text-3xl font-semibold">{currencyFormatter.format(employeeRevenue * (100 - ownerShareRate) / 100)}</p><p className="mt-1 text-xs text-emerald-300/75">Você recebe {100 - ownerShareRate}% · {ownerShareRate}% fica para o dono</p></div>
+              <div className="shrink-0 rounded-xl border border-white/10 bg-white/[0.05] px-3 py-2 text-left sm:text-right"><p className="text-[8px] uppercase tracking-wider text-white/30">Previsão</p><p className="mt-1 text-xs font-semibold">Fim do mês</p></div>
             </div>
           </section>
 
@@ -101,11 +101,11 @@ export function EmployeePortal() {
             <div className="flex items-center justify-between"><div><p className="text-[9px] font-semibold uppercase tracking-[0.18em] text-white/35">Agenda individual</p><h2 className="mt-1 font-display text-xl font-semibold uppercase">Atendimentos do dia</h2></div><Scissors className="h-5 w-5 text-white/25" /></div>
             <div className="mt-4 space-y-3">
               {employeeAppointments.map((appointment) => (
-                <article key={appointment.time} className="glass-card flex items-center gap-3 rounded-2xl border p-3.5">
+                <article key={appointment.time} className="glass-card flex min-w-0 items-center gap-3 rounded-2xl border p-3.5">
                   <div className="w-14 shrink-0 text-center"><p className="font-display text-xl font-semibold">{appointment.time}</p><p className="text-[8px] uppercase tracking-wider text-white/30">{appointment.duration}</p></div>
-                  <div className="h-10 w-px bg-white/10" />
+                  <div className="h-10 w-px shrink-0 bg-white/10" />
                   <div className="min-w-0 flex-1"><p className="truncate text-sm font-semibold">{appointment.client}</p><p className="mt-0.5 truncate text-xs text-white/40">{appointment.service}</p></div>
-                  <div className="text-right"><span className={`hidden rounded-full border px-2 py-1 text-[8px] font-semibold uppercase tracking-wider min-[390px]:inline ${appointment.status === 'Próximo' ? 'border-white bg-white text-black' : 'border-white/10 text-white/40'}`}>{appointment.status}</span><ChevronRight className="ml-auto mt-2 h-4 w-4 text-white/25" /></div>
+                  <div className="shrink-0 text-right"><span className={`hidden rounded-full border px-2 py-1 text-[8px] font-semibold uppercase tracking-wider min-[390px]:inline ${appointment.status === 'Próximo' ? 'border-white bg-white text-black' : 'border-white/10 text-white/40'}`}>{appointment.status}</span><ChevronRight className="ml-auto mt-2 h-4 w-4 text-white/25" /></div>
                 </article>
               ))}
             </div>
