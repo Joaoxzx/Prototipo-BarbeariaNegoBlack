@@ -42,6 +42,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   colorScheme: 'dark',
   themeColor: '#0a0a0a',
+  viewportFit: 'cover',
 }
 
 export default function RootLayout({
@@ -50,7 +51,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="pt-BR" className={`bg-background ${inter.variable} ${oswald.variable}`}>
+    <html lang="pt-BR" data-scroll-behavior="smooth" className={`bg-background ${inter.variable} ${oswald.variable}`}>
       <body className="font-sans antialiased">
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}
